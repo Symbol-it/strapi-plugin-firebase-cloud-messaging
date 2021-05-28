@@ -1,0 +1,37 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/configuration",
+      "handler": "configuration.get",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/configuration",
+      "handler": "configuration.save",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/",
+      "handler": "notifications.subscribe",
+      "config": {
+        "policies": ["isEnabled"]
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/",
+      "handler": "notifications.unsubscribe",
+      "config": {
+        "policies": ["isEnabled"]
+      }
+    }
+  ]
+}
+
