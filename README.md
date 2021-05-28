@@ -1,1 +1,3 @@
-# strapi-plugin-firebase-cloud-messaging
+# Strapi plugin notifications
+
+A quick description of notifications.
