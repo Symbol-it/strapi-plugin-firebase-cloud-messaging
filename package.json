@@ -1,21 +1,23 @@
 {
-  "name": "strapi-plugin-notifications",
+  "name": "strapi-plugin-fcm",
   "version": "0.0.0",
-  "description": "This is the description of the plugin.",
+  "description": "This plugin allow to send firebase notification from strapi.",
   "strapi": {
-    "name": "Notifications",
+    "name": "fcm",
     "icon": "comment-alt",
-    "description": "Description of notifications plugin."
+    "description": "This plugin allow to send firebase notification from strapi."
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
   "author": {
-    "name": "A Strapi developer",
+    "name": "Symbol-it",
     "email": "",
     "url": ""
   },
   "maintainers": [
     {
-      "name": "A Strapi developer",
+      "name": "Symbol-it",
       "email": "",
       "url": ""
     }

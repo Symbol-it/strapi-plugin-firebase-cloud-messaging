@@ -1,51 +1,51 @@
+import React from 'react';
 import pluginPkg from '../../package.json';
 import pluginId from './pluginId';
-import App from './containers/App';
-import Initializer from './containers/Initializer';
-import lifecycles from './lifecycles';
-import trads from './translations';
+import { CheckPagePermissions } from 'strapi-helper-plugin';
+import FCMSettingsPage from './containers/FCMSettingsPage';
+import pluginPermissions from './permissions';
 
 export default strapi => {
   const pluginDescription = pluginPkg.strapi.description || pluginPkg.description;
-  const icon = pluginPkg.strapi.icon;
-  const name = pluginPkg.strapi.name;
 
   const plugin = {
     blockerComponent: null,
     blockerComponentProps: {},
     description: pluginDescription,
-    icon,
+    icon: pluginPkg.strapi.icon,
     id: pluginId,
-    initializer: Initializer,
+    initializer: () => null,
     injectedComponents: [],
-    isReady: false,
+    isReady: true,
     isRequired: pluginPkg.strapi.required || false,
     layout: null,
-    lifecycles,
-    mainComponent: App,
-    name,
+    lifecycles: () => { },
+    mainComponent: null,
+    name: pluginPkg.strapi.name,
     preventComponentRendering: false,
-    trads,
-    menu: {
-      pluginsSectionLinks: [
-        {
-          destination: `/plugins/${pluginId}`,
-          icon,
-          label: {
-            id: `${pluginId}.plugin.name`,
-            defaultMessage: name,
+    settings: {
+      menuSection: {
+        id: pluginId,
+        title: 'FCM',
+        links: [
+          {
+            name: 'fcm settings',
+            permissions: pluginPermissions.settings,
+            title: {
+              id: `${pluginId}.settings`,
+              defaultMessage: 'Settings',
+            },
+            to: `${strapi.settingsBaseURL}/${pluginId}`,
+            Component: () => (
+              <CheckPagePermissions permissions={pluginPermissions.settings}>
+                <FCMSettingsPage />
+              </CheckPagePermissions>
+            ),
           },
-          name,
-          permissions: [
-            // Uncomment to set the permissions of the plugin here
-            // {
-            //   action: '', // the action name should be plugins::plugin-name.actionType
-            //   subject: null,
-            // },
-          ],
-        },
-      ],
+        ],
+      }
     },
+    trads: {},
   };
 
   return strapi.registerPlugin(plugin);
