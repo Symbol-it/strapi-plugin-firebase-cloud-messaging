@@ -18,8 +18,8 @@ module.exports = {
   },
 
   async send(topic, title,  message, actions) {
-    const pwaNotificationIsEnabled = await strapi.plugins.notifications.services.configuration.pwaNotificationIsEnabled();
-    if (pwaNotificationIsEnabled) {
+    const fcmIsEnabled = await strapi.plugins['firebase-cloud-messaging'].services.settings.isEnabled();
+    if (fcmIsEnabled) {
       const payload = {
         topic: topic,
         notification: {

@@ -9,7 +9,7 @@
 module.exports = {
   subscribe: async (ctx)  => {
     const { token, uid } = ctx.request.body;
-    await strapi.plugins.notifications.services.notification.subscribeToTopic(token, uid);
+    await strapi.plugins['firebase-cloud-messaging'].services.fcm.subscribeToTopic(token, uid);
 
     ctx.send({
       message: 'ok'
@@ -18,7 +18,7 @@ module.exports = {
 
   unsubscribe: async (ctx)  => {
     const { token, uid } = ctx.request.body;
-    await strapi.plugins.notifications.services.notification.unsubscribeToTopic(token, uid);
+    await strapi.plugins['firebase-cloud-messaging'].services.fcm.unsubscribeToTopic(token, uid);
     ctx.send({
       message: 'ok'
     });

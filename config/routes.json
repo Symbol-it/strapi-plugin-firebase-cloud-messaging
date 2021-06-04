@@ -2,24 +2,19 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/configuration",
-      "handler": "configuration.get",
+      "path": "/settings",
+      "handler": "settings.get",
       "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "PUT",
-      "path": "/configuration",
-      "handler": "configuration.save",
-      "config": {
-        "policies": []
+        "policies": [
+          "admin::isAuthenticatedAdmin",
+          ["admin::hasPermissions", ["plugins::firebase-cloud-messaging.settings.read"]]
+        ]
       }
     },
     {
       "method": "POST",
       "path": "/",
-      "handler": "notifications.subscribe",
+      "handler": "fcm.subscribe",
       "config": {
         "policies": ["isEnabled"]
       }
@@ -27,11 +22,10 @@
     {
       "method": "DELETE",
       "path": "/",
-      "handler": "notifications.unsubscribe",
+      "handler": "fcm.unsubscribe",
       "config": {
         "policies": ["isEnabled"]
       }
     }
   ]
 }
-
